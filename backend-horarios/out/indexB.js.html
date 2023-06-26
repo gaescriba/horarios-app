@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: indexB.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: indexB.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Configuración del token JWT.
+ * @typedef {Object} JwtConfig
+ * @property {string} secret - La clave secreta para firmar el token.
+ * @property {string} expiresIn - La duración de tiempo de vida del token.
+ */
+
+/** @type {JwtConfig} */
+const jwtConfig = {
+  secret: 'pepito',
+  expiresIn: '30m'
+}
+
+const express = require('express')
+const cors = require('cors')
+
+const sequelize = require('./sequelize.js')
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
+
+const manejador = require('./controller/manejador.js')
+
+const Profesor = require('./model/Profesores.js')
+const Alumno = require('./model/Alumnos.js')
+const Horario = require('./model/Horarios.js')
+const Actividad = require('./model/Actividades.js')
+const Reunion = require('./model/Reuniones.js')
+
+const app = express()
+const port = 3000
+
+/**
+ * Función asincrónica para insertar un profesor en la base de datos.
+ * @async
+ */
+let insertProfesor = async () => {
+  const juanMir = await Profesor.create({ nombre_profesor: 'Juan Mir', email_profesor: 'test1@mail.com', password_profesor: '123' })
+}
+
+/**
+ * Función asincrónica para insertar otro profesor en la base de datos.
+ * @async
+ */
+let insertProfesor2 = async () => {
+  const juanMir = await Profesor.create({ nombre_profesor: 'Juan Miro', email_profesor: 'test3@mail.com', password_profesor: '123' })
+}
+
+/**
+ * Función asincrónica para insertar un alumno en la base de datos.
+ * @async
+ */
+let insertAlumno = async () => {
+  const pepitoPalotes = await Alumno.create({ nombre_alumno: 'Perico de los palotes', email_alumno: 'test2@mail.com', password_alumno: '1234' })
+}
+
+/**
+ * Función asincrónica para insertar actividades en la base de datos.
+ * @async
+ */
+let insertActividades = async () => {
+  const act1 = await Actividad.create({ descripcion_actividad: 'Reunion directiva', hora_inicio: '10:00', hora_termino: '13:00', id_profesor: 1, id_horario: 5 })
+  const act2 = await Actividad.create({ descripcion_actividad: 'Reunion profesores', hora_inicio: '15:00', hora_termino: '16:00', id_profesor: 1, id_horario: 5 })
+}
+
+/** @type {boolean} */
+let forceFlag = false
+
+app.use(cors())
+app.use(express.json())
+app.use('/creators', manejador)
+app.use('/getters', manejador)
+app.use('/updaters', manejador)
+app.use('/deleters', manejador)
+
+sequelize.sync({ force: forceFlag })
+  .then(() => console.log('Base de datos sincronizada'))
+  .catch(err => console.log(`Error al sincronizar la base de datos ${err}`))
+
+app.listen(port, ()=>{
+  console.log(`Server running on port: ${port}`)
+})
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Alumno">Alumno</a></li><li><a href="global.html#DELETE/deleteActividad">DELETE /deleteActividad</a></li><li><a href="global.html#DELETE/deleteActividades">DELETE /deleteActividades</a></li><li><a href="global.html#DELETE/deleteHorario">DELETE /deleteHorario</a></li><li><a href="global.html#DELETE/deleteReunion">DELETE /deleteReunion</a></li><li><a href="global.html#GET/actividadesByHorario">GET /actividadesByHorario</a></li><li><a href="global.html#GET/alumnoById">GET /alumnoById</a></li><li><a href="global.html#GET/horariosByProfesor">GET /horariosByProfesor</a></li><li><a href="global.html#GET/profesorById">GET /profesorById</a></li><li><a href="global.html#GET/profesores">GET /profesores</a></li><li><a href="global.html#GET/reunionesByProfesor">GET /reunionesByProfesor</a></li><li><a href="global.html#Horario">Horario</a></li><li><a href="global.html#POST/crearActividad">POST /crearActividad</a></li><li><a href="global.html#POST/crearHorario">POST /crearHorario</a></li><li><a href="global.html#POST/login">POST /login</a></li><li><a href="global.html#POST/solicitarReunion">POST /solicitarReunion</a></li><li><a href="global.html#PUT/aceptarReunion">PUT /aceptarReunion</a></li><li><a href="global.html#PUT/modificarActividad">PUT /modificarActividad</a></li><li><a href="global.html#PUT/modificarHorario">PUT /modificarHorario</a></li><li><a href="global.html#Profesor">Profesor</a></li><li><a href="global.html#Reunion">Reunion</a></li><li><a href="global.html#aceptarReunion">aceptarReunion</a></li><li><a href="global.html#actividadesByHorario">actividadesByHorario</a></li><li><a href="global.html#alumnoById">alumnoById</a></li><li><a href="global.html#crearActividad">crearActividad</a></li><li><a href="global.html#crearHorario">crearHorario</a></li><li><a href="global.html#deleteActividad">deleteActividad</a></li><li><a href="global.html#deleteActividades">deleteActividades</a></li><li><a href="global.html#deleteHorario">deleteHorario</a></li><li><a href="global.html#forceFlag">forceFlag</a></li><li><a href="global.html#horariosByProfesor">horariosByProfesor</a></li><li><a href="global.html#insertActividades">insertActividades</a></li><li><a href="global.html#insertAlumno">insertAlumno</a></li><li><a href="global.html#insertProfesor">insertProfesor</a></li><li><a href="global.html#insertProfesor2">insertProfesor2</a></li><li><a href="global.html#jwtConfig">jwtConfig</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#modificarActividad">modificarActividad</a></li><li><a href="global.html#modificarHorario">modificarHorario</a></li><li><a href="global.html#profesorById">profesorById</a></li><li><a href="global.html#profesores">profesores</a></li><li><a href="global.html#reunionesByProfesor">reunionesByProfesor</a></li><li><a href="global.html#solicitarReunion">solicitarReunion</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Jun 15 2023 03:09:06 GMT-0400 (Chile Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

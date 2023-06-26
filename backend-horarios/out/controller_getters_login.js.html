@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: controller/getters/login.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: controller/getters/login.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const jwt = require('jsonwebtoken')
+
+const Profesor = require('../../model/Profesores.js')
+const Alumno = require('../../model/Alumnos.js')
+
+const jwtConfig = {
+  secret: 'pepito',
+  expiresIn: '30m',
+}
+
+/**
+ * Realiza el inicio de sesión de un usuario.
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta HTTP.
+ */
+const login = async (req, res) => {
+  console.log('en funcion login')
+  const { email, password, isProfesor } = req.body
+  try {
+    if (isProfesor) {
+      const profesor = await Profesor.findOne({ where: { email_profesor: email } })
+
+      if (!profesor) {
+        return res.status(401).json({ message: 'No encontrado' })
+      } else {
+        const passwordValida = password == profesor.dataValues.password_profesor
+
+        if (!passwordValida) {
+          return res.status(401).json({ message: 'Contraseña incorrecta' })
+        } else {
+          const token = jwt.sign({ idProfesor: profesor.dataValues.id_profesor }, jwtConfig.secret, { expiresIn: jwtConfig.expiresIn })
+          res.json({ token })
+        }
+      }
+    } else {
+      console.log('en login alumno')
+      const alumno = await Alumno.findOne({ where: { email_alumno: email } })
+      console.log(alumno.dataValues)
+
+      if (!alumno) {
+        console.log('no se encontró el alumno')
+        return res.status(401).json({ message: 'No encontrado' })
+      } else {
+        console.log('se encontró el alumno')
+        const passwordValida = password == alumno.dataValues.password_alumno
+
+        if (!passwordValida) {
+          console.log('contraseña inválida')
+          return res.status(401).json({ message: 'Contraseña incorrecta' })
+        } else {
+          console.log('contraseña válida')
+          const token = jwt.sign({ idAlumno: alumno.dataValues.id_alumno }, jwtConfig.secret, { expiresIn: jwtConfig.expiresIn })
+          res.json({ token })
+        }
+      }
+    }
+  } catch (err) {
+    return res.status(401).json({ message: 'Error en autenticación' })
+  }
+}
+
+module.exports = { login }
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Alumno">Alumno</a></li><li><a href="global.html#DELETE/deleteActividad">DELETE /deleteActividad</a></li><li><a href="global.html#DELETE/deleteActividades">DELETE /deleteActividades</a></li><li><a href="global.html#DELETE/deleteHorario">DELETE /deleteHorario</a></li><li><a href="global.html#DELETE/deleteReunion">DELETE /deleteReunion</a></li><li><a href="global.html#GET/actividadesByHorario">GET /actividadesByHorario</a></li><li><a href="global.html#GET/alumnoById">GET /alumnoById</a></li><li><a href="global.html#GET/horariosByProfesor">GET /horariosByProfesor</a></li><li><a href="global.html#GET/profesorById">GET /profesorById</a></li><li><a href="global.html#GET/profesores">GET /profesores</a></li><li><a href="global.html#GET/reunionesByProfesor">GET /reunionesByProfesor</a></li><li><a href="global.html#Horario">Horario</a></li><li><a href="global.html#POST/crearActividad">POST /crearActividad</a></li><li><a href="global.html#POST/crearHorario">POST /crearHorario</a></li><li><a href="global.html#POST/login">POST /login</a></li><li><a href="global.html#POST/solicitarReunion">POST /solicitarReunion</a></li><li><a href="global.html#PUT/aceptarReunion">PUT /aceptarReunion</a></li><li><a href="global.html#PUT/modificarActividad">PUT /modificarActividad</a></li><li><a href="global.html#PUT/modificarHorario">PUT /modificarHorario</a></li><li><a href="global.html#Profesor">Profesor</a></li><li><a href="global.html#Reunion">Reunion</a></li><li><a href="global.html#aceptarReunion">aceptarReunion</a></li><li><a href="global.html#actividadesByHorario">actividadesByHorario</a></li><li><a href="global.html#alumnoById">alumnoById</a></li><li><a href="global.html#crearActividad">crearActividad</a></li><li><a href="global.html#crearHorario">crearHorario</a></li><li><a href="global.html#deleteActividad">deleteActividad</a></li><li><a href="global.html#deleteActividades">deleteActividades</a></li><li><a href="global.html#deleteHorario">deleteHorario</a></li><li><a href="global.html#forceFlag">forceFlag</a></li><li><a href="global.html#horariosByProfesor">horariosByProfesor</a></li><li><a href="global.html#insertActividades">insertActividades</a></li><li><a href="global.html#insertAlumno">insertAlumno</a></li><li><a href="global.html#insertProfesor">insertProfesor</a></li><li><a href="global.html#insertProfesor2">insertProfesor2</a></li><li><a href="global.html#jwtConfig">jwtConfig</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#modificarActividad">modificarActividad</a></li><li><a href="global.html#modificarHorario">modificarHorario</a></li><li><a href="global.html#profesorById">profesorById</a></li><li><a href="global.html#profesores">profesores</a></li><li><a href="global.html#reunionesByProfesor">reunionesByProfesor</a></li><li><a href="global.html#solicitarReunion">solicitarReunion</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Jun 15 2023 03:09:06 GMT-0400 (Chile Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: controller/manejador.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: controller/manejador.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const express = require('express');
+const router = express.Router();
+
+// Creators
+const { crearActividad } = require('./creators/crearActividad.js');
+const { crearHorario } = require('./creators/crearHorario.js');
+const { solicitarReunion } = require('./creators/solicitarReunion.js');
+
+// Getters
+const { actividadesByHorario } = require('./getters/actividadesByHorario.js');
+const { alumnoById } = require('./getters/alumnoById.js');
+const { horariosByProfesor } = require('./getters/horariosByProfesor.js');
+const { login } = require('./getters/login.js');
+const { profesorById } = require('./getters/profesorById.js');
+const { profesores } = require('./getters/profesores.js');
+const { reunionesByProfesor } = require('./getters/reunionesByProfesor.js');
+
+// Updaters
+const { aceptarReunion } = require('./updaters/aceptarReunion.js');
+const { modificarActividad } = require('./updaters/modificarActividad.js');
+const { modificarHorario } = require('./updaters/modificarHorario.js');
+
+// Deleters
+const { deleteActividades } = require('./deleters/deleteActividades.js');
+const { deleteActividad } = require('./deleters/deleteActividad.js');
+const { deleteHorario } = require('./deleters/deleteHorario.js');
+const { deleteReunion } = require('./deleters/deleteReunion.js');
+
+/**
+ * Rutas para crear recursos.
+ */
+
+/**
+ * Crea una nueva actividad.
+ * @name POST /crearActividad
+ * @function
+ */
+router.post('/crearActividad', crearActividad);
+
+/**
+ * Crea un nuevo horario.
+ * @name POST /crearHorario
+ * @function
+ */
+router.post('/crearHorario', crearHorario);
+
+/**
+ * Solicita una reunión.
+ * @name POST /solicitarReunion
+ * @function
+ */
+router.post('/solicitarReunion', solicitarReunion);
+
+
+/**
+ * Rutas para obtener recursos.
+ */
+
+/**
+ * Obtiene las actividades por horario.
+ * @name GET /actividadesByHorario
+ * @function
+ */
+router.get('/actividadesByHorario', actividadesByHorario);
+
+/**
+ * Obtiene un alumno por su ID.
+ * @name GET /alumnoById
+ * @function
+ */
+router.get('/alumnoById', alumnoById);
+
+/**
+ * Obtiene los horarios por profesor.
+ * @name GET /horariosByProfesor
+ * @function
+ */
+router.get('/horariosByProfesor', horariosByProfesor);
+
+/**
+ * Inicia sesión.
+ * @name POST /login
+ * @function
+ */
+router.post('/login', login);
+
+/**
+ * Obtiene un profesor por su ID.
+ * @name GET /profesorById
+ * @function
+ */
+router.get('/profesorById', profesorById);
+
+/**
+ * Obtiene la lista de profesores.
+ * @name GET /profesores
+ * @function
+ */
+router.get('/profesores', profesores);
+
+/**
+ * Obtiene las reuniones por profesor.
+ * @name GET /reunionesByProfesor
+ * @function
+ */
+router.get('/reunionesByProfesor', reunionesByProfesor);
+
+
+/**
+ * Rutas para actualizar recursos.
+ */
+
+/**
+ * Acepta una reunión.
+ * @name PUT /aceptarReunion
+ * @function
+ */
+router.put('/aceptarReunion', aceptarReunion);
+
+/**
+ * Modifica una actividad existente.
+ * @name PUT /modificarActividad
+ * @function
+ */
+router.put('/modificarActividad', modificarActividad);
+
+/**
+ * Modifica un horario existente.
+ * @name PUT /modificarHorario
+ * @function
+ */
+router.put('/modificarHorario', modificarHorario);
+
+
+/**
+ * Rutas para eliminar recursos.
+ */
+
+/**
+ * Elimina varias actividades.
+ * @name DELETE /deleteActividades
+ * @function
+ */
+router.delete('/deleteActividades', deleteActividades);
+
+/**
+ * Elimina una actividad.
+ * @name DELETE /deleteActividad
+ * @function
+ */
+router.delete('/deleteActividad', deleteActividad);
+
+/**
+ * Elimina un horario.
+ * @name DELETE /deleteHorario
+ * @function
+ */
+router.delete('/horario', deleteHorario);
+
+/**
+ * Elimina una reunión.
+ * @name DELETE /deleteReunion
+ * @function
+ */
+router.delete('/deleteReunion', deleteReunion);
+
+module.exports = router;
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Alumno">Alumno</a></li><li><a href="global.html#DELETE/deleteActividad">DELETE /deleteActividad</a></li><li><a href="global.html#DELETE/deleteActividades">DELETE /deleteActividades</a></li><li><a href="global.html#DELETE/deleteHorario">DELETE /deleteHorario</a></li><li><a href="global.html#DELETE/deleteReunion">DELETE /deleteReunion</a></li><li><a href="global.html#GET/actividadesByHorario">GET /actividadesByHorario</a></li><li><a href="global.html#GET/alumnoById">GET /alumnoById</a></li><li><a href="global.html#GET/horariosByProfesor">GET /horariosByProfesor</a></li><li><a href="global.html#GET/profesorById">GET /profesorById</a></li><li><a href="global.html#GET/profesores">GET /profesores</a></li><li><a href="global.html#GET/reunionesByProfesor">GET /reunionesByProfesor</a></li><li><a href="global.html#Horario">Horario</a></li><li><a href="global.html#POST/crearActividad">POST /crearActividad</a></li><li><a href="global.html#POST/crearHorario">POST /crearHorario</a></li><li><a href="global.html#POST/login">POST /login</a></li><li><a href="global.html#POST/solicitarReunion">POST /solicitarReunion</a></li><li><a href="global.html#PUT/aceptarReunion">PUT /aceptarReunion</a></li><li><a href="global.html#PUT/modificarActividad">PUT /modificarActividad</a></li><li><a href="global.html#PUT/modificarHorario">PUT /modificarHorario</a></li><li><a href="global.html#Profesor">Profesor</a></li><li><a href="global.html#Reunion">Reunion</a></li><li><a href="global.html#aceptarReunion">aceptarReunion</a></li><li><a href="global.html#actividadesByHorario">actividadesByHorario</a></li><li><a href="global.html#alumnoById">alumnoById</a></li><li><a href="global.html#crearActividad">crearActividad</a></li><li><a href="global.html#crearHorario">crearHorario</a></li><li><a href="global.html#deleteActividad">deleteActividad</a></li><li><a href="global.html#deleteActividades">deleteActividades</a></li><li><a href="global.html#deleteHorario">deleteHorario</a></li><li><a href="global.html#forceFlag">forceFlag</a></li><li><a href="global.html#horariosByProfesor">horariosByProfesor</a></li><li><a href="global.html#insertActividades">insertActividades</a></li><li><a href="global.html#insertAlumno">insertAlumno</a></li><li><a href="global.html#insertProfesor">insertProfesor</a></li><li><a href="global.html#insertProfesor2">insertProfesor2</a></li><li><a href="global.html#jwtConfig">jwtConfig</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#modificarActividad">modificarActividad</a></li><li><a href="global.html#modificarHorario">modificarHorario</a></li><li><a href="global.html#profesorById">profesorById</a></li><li><a href="global.html#profesores">profesores</a></li><li><a href="global.html#reunionesByProfesor">reunionesByProfesor</a></li><li><a href="global.html#solicitarReunion">solicitarReunion</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Jun 15 2023 03:09:06 GMT-0400 (Chile Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
