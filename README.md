@@ -24,13 +24,13 @@ La aplicación "app-horarios" se creó para abordar la problemática común en m
 
 #### Prerequisitos
 
-##### MySQL
+##### **MySQL**
 Debes una instancia de MySQL disponible y configurada, puedes descargar e instalar MySQL desde su [sitio web oficial](https://www.mysql.com/)
 
-##### Node.js
+##### **Node.js**
 Asegúrate de tener Node.js instalado en tu sistema. Puedes descargar la última versión estable de Node.js [desde su sitio web oficial](https://nodejs.org/)
 
-##### Expo CLI
+##### **Expo CLI**
 Es necesario tener Expo CLI instalado globalmente en tu sistema. Puedes instalarlo ejecutando el siguiente comando en tu terminal:
 ```npm install -g expo-cli```
 
